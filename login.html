@@ -1,0 +1,114 @@
+<style>
+    /* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 8%;
+    background:#111;
+    color: white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+header h1{
+    font-size:30px;
+    color:#ffcc00;
+}
+
+/* Navbar */
+nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+    font-weight:500;
+    transition:.3s;
+    padding:8px 15px;
+    border-radius:5px;
+}
+
+nav a:hover{
+    background:#d90429;
+    color:#fbf6f6;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+}
+</style>
+
+<!-- Header -->
+<header>
+    <h1>🎬 Movie Ticket Booking</h1>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="offers.html">Offers</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+
+    <div class="login-box">
+
+        <span class="close" onclick="closeLogin()">&times;</span>
+
+        <h2>🔐 Login</h2>
+
+        <form>
+
+            <input type="email" placeholder="Email Address" required>
+
+            <input type="password" placeholder="Password" required>
+
+            <div class="remember">
+                <label>
+                    <input type="checkbox">
+                    Remember Me
+                </label>
+
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <p class="register">
+                Don't have an account?
+                <a href="#">Register Now</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>

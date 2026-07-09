@@ -1,0 +1,182 @@
+<style>
+/* Offers Section */
+
+
+
+.offers {
+    padding: 60px 8%;
+    background: white;
+    text-align: center;
+}
+
+.offers h2 {
+    font-size: 35px;
+    color: #d90429;
+    margin-bottom: 30px;
+}
+
+.offers-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.offer-card {
+    width: 260px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.offer-card:hover {
+    transform: translateY(-10px);
+}
+
+.offer-card h3 {
+    color: #d90429;
+    margin-bottom: 10px;
+}
+
+.offer-card p {
+    margin: 10px 0;
+    color: #444;
+}
+
+.offer-card button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #d90429;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.offer-card button:hover {
+    background: black;
+}
+
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 8%;
+    background:#111;
+    color: white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+header h1{
+    font-size:30px;
+    color:#ffcc00;
+}
+
+/* Navbar */
+nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+    font-weight:500;
+    transition:.3s;
+    padding:8px 15px;
+    border-radius:5px;
+}
+
+nav a:hover{
+    background:#d90429;
+    color:#fbf6f6;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+}
+
+</style>
+
+<header>
+    <h1>🎬 Movie Ticket Booking</h1>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="offers.html">Offers</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+
+<!-- Offers Section -->
+<section class="offers">
+
+    <h2>🔥 Exclusive Movie Offers</h2>
+
+    <div class="offers-container">
+
+        <div class="offer-card">
+            <h3>🎉 First Booking Offer</h3>
+            <p>Get <strong>20% OFF</strong> on your first movie ticket.</p>
+            <p><b>Coupon:</b> FIRST20</p>
+            <p>⏳ Valid Till: 31 Dec 2026</p>
+            <button>Claim Offer</button>
+        </div>
+
+        <div class="offer-card">
+            <h3>🍿 Combo Offer</h3>
+            <p>Buy 2 Tickets and Get <strong>1 Popcorn Free</strong>.</p>
+            <p><b>Coupon:</b> POPFREE</p>
+            <p>⏳ Valid Till: 31 Dec 2026</p>
+            <button>Claim Offer</button>
+        </div>
+
+        <div class="offer-card">
+            <h3>💳 UPI Cashback</h3>
+            <p>Pay using UPI and get <strong>₹100 Cashback</strong>.</p>
+            <p><b>Coupon:</b> UPI100</p>
+            <p>⏳ Valid Till: 31 Dec 2026</p>
+            <button>Claim Offer</button>
+        </div>
+
+        <div class="offer-card">
+            <h3>🎬 Weekend Special</h3>
+            <p>Book tickets on Saturday & Sunday and get <strong>15% OFF</strong>.</p>
+            <p><b>Coupon:</b> WEEKEND15</p>
+            <p>⏳ Valid Till: 31 Dec 2026</p>
+            <button>Claim Offer</button>
+        </div>
+
+    </div>
+
+</section>
