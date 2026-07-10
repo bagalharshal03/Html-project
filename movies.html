@@ -1,242 +1,244 @@
 <style>
     /* ===== Movies Section ===== */
-*{
-    background-color: #111;
-}
-.movies{
-    width:90%;
-    margin:60px auto;
-}
-
-.section-title{
-    text-align:center;
-    font-size:42px;
-    color:#ff0000;
-    margin-bottom:40px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    animation:fadeDown 1s ease;
-}
-
-/* Grid */
-
-.movie-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:35px;
-}
-
-/* Card */
-
-.card{
-    background:#111;
-    border:2px solid #222;
-    border-radius:18px;
-    overflow:hidden;
-    transition:0.4s ease;
-    box-shadow:0 0 15px rgba(255,0,0,0.15);
-    animation:fadeUp .8s ease;
-}
-
-.card:hover{
-    transform:translateY(-12px) scale(1.03);
-    border-color:#ff0000;
-    box-shadow:0 0 30px rgba(255,0,0,.6);
-}
-
-/* Movie Image */
-
-.card img{
-    width:100%;
-    height:380px;
-    object-fit:cover;
-    transition:0.5s;
-}
-
-.card:hover img{
-    transform:scale(1.08);
-}
-
-/* Movie Name */
-
-.card h3{
-    color:#fff;
-    text-align:center;
-    margin:15px 0;
-    font-size:25px;
-}
-
-/* Movie Details */
-
-.card p{
-    color:#d0d0d0;
-    padding:0 18px;
-    margin:8px 0;
-    font-size:15px;
-}
-
-/* Labels */
-
-.card label{
-    display:block;
-    color:#ff4444;
-    margin:15px 18px 6px;
-    font-weight:bold;
-}
-
-/* Input */
-
-.card input,
-.card select{
-    width:88%;
-    margin:0 18px;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    background:#222;
-    color:white;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
-}
-
-.card input:focus,
-.card select:focus{
-    box-shadow:0 0 10px red;
-}
-
-/* Button */
-
-.card button{
-    width:88%;
-    margin:22px 18px;
-    padding:13px;
-    border:none;
-    border-radius:8px;
-    background:linear-gradient(45deg,#ff0000,#b30000);
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.card button:hover{
-    background:linear-gradient(45deg,#ffffff,#ff0000);
-    color:black;
-    transform:scale(1.05);
-    box-shadow:0 0 20px red;
-}
-
-/* Animations */
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes fadeDown{
-    from{
-        opacity:0;
-        transform:translateY(-40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* Responsive */
-
-@media(max-width:768px){
-
-.section-title{
-    font-size:30px;
-}
-
-.movie-container{
-    grid-template-columns:1fr;
-}
-
-.card img{
-    height:320px;
-}
-
-.card h3{
-    font-size:22px;
-}
-
-}
-
-/* Reset */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-/* Header */
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 8%;
-    background:#111;
-    color:white;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-header h1{
-    font-size:30px;
-    color:#ffcc00;
-}
-
-/* Navbar */
-nav{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
-
-nav a{
-    text-decoration:none;
-    color:white;
-    font-size:18px;
-    font-weight:500;
-    transition:.3s;
-    padding:8px 15px;
-    border-radius:5px;
-}
-
-nav a:hover{
-    background:#d90429;
-    color:#fff;
-}
-
-/* Responsive */
-@media(max-width:768px){
-
-    header{
-        flex-direction:column;
-        gap:15px;
+    * {
+        background-color: #111;
     }
 
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
+    .movies {
+        width: 90%;
+        margin: 60px auto;
     }
 
-}
+    .section-title {
+        text-align: center;
+        font-size: 42px;
+        color: #ff0000;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        animation: fadeDown 1s ease;
+    }
 
+    /* Grid */
+
+    .movie-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 35px;
+    }
+
+    /* Card */
+
+    .card {
+        background: #111;
+        border: 2px solid #222;
+        border-radius: 18px;
+        overflow: hidden;
+        transition: 0.4s ease;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+        animation: fadeUp .8s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-12px) scale(1.03);
+        border-color: #ff0000;
+        box-shadow: 0 0 30px rgba(255, 0, 0, .6);
+    }
+
+    /* Movie Image */
+
+    .card img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+
+    .card:hover img {
+        transform: scale(1.08);
+    }
+
+    /* Movie Name */
+
+    .card h3 {
+        color: #fff;
+        text-align: center;
+        margin: 15px 0;
+        font-size: 25px;
+    }
+
+    /* Movie Details */
+
+    .card p {
+        color: #d0d0d0;
+        padding: 0 18px;
+        margin: 8px 0;
+        font-size: 15px;
+    }
+
+    /* Labels */
+
+    .card label {
+        display: block;
+        color: #ff4444;
+        margin: 15px 18px 6px;
+        font-weight: bold;
+    }
+
+    /* Input */
+
+    .card input,
+    .card select {
+        width: 88%;
+        margin: 0 18px;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #222;
+        color: white;
+        font-size: 15px;
+        outline: none;
+        transition: .3s;
+    }
+
+    .card input:focus,
+    .card select:focus {
+        box-shadow: 0 0 10px red;
+    }
+
+    /* Button */
+
+    .card button {
+        width: 88%;
+        margin: 22px 18px;
+        padding: 13px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(45deg, #ff0000, #b30000);
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .card button:hover {
+        background: linear-gradient(45deg, #ffffff, #ff0000);
+        color: black;
+        transform: scale(1.05);
+        box-shadow: 0 0 20px red;
+    }
+
+    /* Animations */
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeDown {
+        from {
+            opacity: 0;
+            transform: translateY(-40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px) {
+
+        .section-title {
+            font-size: 30px;
+        }
+
+        .movie-container {
+            grid-template-columns: 1fr;
+        }
+
+        .card img {
+            height: 320px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+        }
+
+    }
+
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Header */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 8%;
+        background: #111;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    header h1 {
+        font-size: 30px;
+        color: #ffcc00;
+    }
+
+    /* Navbar */
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        transition: .3s;
+        padding: 8px 15px;
+        border-radius: 5px;
+    }
+
+    nav a:hover {
+        background: #d90429;
+        color: #fff;
+    }
+
+    /* Responsive */
+    @media(max-width:768px) {
+
+        header {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        nav {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+    }
 </style>
 
 <header>
@@ -378,44 +380,44 @@ nav a:hover{
         </div>
 
         <!-- Movie 7 -->
-<div class="card">
-    <img src="https://picsum.photos/300/400?random=7" alt="The Last Warrior">
-    <h3>The Last Warrior</h3>
-    <p>⭐ 4.8 | Adventure | 2h 25m</p>
+        <div class="card">
+            <img src="https://picsum.photos/300/400?random=7" alt="The Last Warrior">
+            <h3>The Last Warrior</h3>
+            <p>⭐ 4.8 | Adventure | 2h 25m</p>
 
-    <label>Select Date</label>
-    <input type="date">
+            <label>Select Date</label>
+            <input type="date">
 
-    <label>Select Time</label>
-    <select>
-        <option>10:00 AM</option>
-        <option>1:00 PM</option>
-        <option>4:00 PM</option>
-        <option>7:00 PM</option>
-    </select>
+            <label>Select Time</label>
+            <select>
+                <option>10:00 AM</option>
+                <option>1:00 PM</option>
+                <option>4:00 PM</option>
+                <option>7:00 PM</option>
+            </select>
 
-    <button>🎟 Book Ticket</button>
-</div>
+            <button>🎟 Book Ticket</button>
+        </div>
 
-<!-- Movie 8 -->
-<div class="card">
-    <img src="https://picsum.photos/300/400?random=8" alt="Galaxy Mission">
-    <h3>Galaxy Mission</h3>
-    <p>⭐ 4.9 | Sci-Fi | 2h 40m</p>
+        <!-- Movie 8 -->
+        <div class="card">
+            <img src="https://picsum.photos/300/400?random=8" alt="Galaxy Mission">
+            <h3>Galaxy Mission</h3>
+            <p>⭐ 4.9 | Sci-Fi | 2h 40m</p>
 
-    <label>Select Date</label>
-    <input type="date">
+            <label>Select Date</label>
+            <input type="date">
 
-    <label>Select Time</label>
-    <select>
-        <option>11:00 AM</option>
-        <option>2:00 PM</option>
-        <option>5:00 PM</option>
-        <option>8:00 PM</option>
-    </select>
+            <label>Select Time</label>
+            <select>
+                <option>11:00 AM</option>
+                <option>2:00 PM</option>
+                <option>5:00 PM</option>
+                <option>8:00 PM</option>
+            </select>
 
-    <button>🎟 Book Ticket</button>
-   </div>
- 
-   </div>
+            <button>🎟 Book Ticket</button>
+        </div>
+
+    </div>
 </section>

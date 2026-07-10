@@ -1,254 +1,282 @@
-
 <style>
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    /* LOGIN PAGE  */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-/* Background */
-body{
-    background:#111;
-}
-
-/* ==========================
-   Login Modal
-========================== */
-
-.modal{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.75);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* Hide Modal Initially */
-/*
-.modal{
-    display:none;
-}
-*/
-
-.login-box{
-    width:380px;
-    background:#1a1a1a;
-    padding:35px;
-    border-radius:12px;
-    box-shadow:0 0 20px rgba(255,0,0,0.4);
-    position:relative;
-    animation:popup .4s ease;
-}
-
-/* Popup Animation */
-
-@keyframes popup{
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-.login-box h2{
-    text-align:center;
-    color:#ff3b3b;
-    margin-bottom:25px;
-}
-
-.close{
-    position:absolute;
-    right:15px;
-    top:10px;
-    font-size:30px;
-    color:#fff;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.close:hover{
-    color:red;
-}
-
-/* Input Fields */
-
-.login-box input[type="email"],
-.login-box input[type="password"]{
-    width:100%;
-    padding:14px;
-    margin:12px 0;
-    border:none;
-    border-radius:8px;
-    background:#2c2c2c;
-    color:#fff;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
-}
-
-.login-box input:focus{
-    border:2px solid red;
-}
-
-/* Remember Me */
-
-.remember{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:18px 0;
-    font-size:14px;
-    color:white;
-}
-
-.remember label{
-    display:flex;
-    align-items:center;
-    gap:5px;
-}
-
-.remember a{
-    color:#ff4d4d;
-    text-decoration:none;
-}
-
-.remember a:hover{
-    text-decoration:underline;
-}
-
-/* Login Button */
-
-button{
-    width:100%;
-    padding:14px;
-    background:#e50914;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-button:hover{
-    background:#ff1f1f;
-    transform:translateY(-2px);
-}
-
-/* Register */
-
-.register{
-    text-align:center;
-    margin-top:20px;
-    color:#ccc;
-}
-
-.register a{
-    color:#ff4d4d;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.register a:hover{
-    text-decoration:underline;
-}
-
-/* Responsive */
-
-@media(max-width:500px){
-
-    .login-box{
-        width:90%;
-        padding:25px;
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f2f2;
     }
 
-    .login-box h2{
-        font-size:24px;
+    /* Login Section */
+
+    .login-section {
+        padding: 70px 20px;
     }
 
-}
-
-/* Reset */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-/* Header */
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 8%;
-    background:#111;
-    color: white;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-header h1{
-    font-size:30px;
-    color:#ffcc00;
-}
-
-/* Navbar */
-nav{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
-
-nav a{
-    text-decoration:none;
-    color:white;
-    font-size:18px;
-    font-weight:500;
-    transition:.3s;
-    padding:8px 15px;
-    border-radius:5px;
-}
-
-nav a:hover{
-    background:#d90429;
-    color:#fbf6f6;
-}
-
-/* Responsive */
-@media(max-width:768px){
-
-    header{
-        flex-direction:column;
-        gap:15px;
+    .login-container {
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
     }
 
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
+    /* Heading */
+
+    .login-container h1 {
+        text-align: center;
+        color: #c70039;
+        font-size: 48px;
+        margin-bottom: 10px;
     }
 
-}
+    .login-container p {
+        text-align: center;
+        color: #666;
+        font-size: 20px;
+        margin-bottom: 35px;
+    }
 
+    /* Inputs */
 
+    .login-container input[type=email],
+    .login-container input[type=password] {
+
+        width: 100%;
+        padding: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 18px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    .login-container input:focus {
+        border: 1px solid #c70039;
+    }
+
+    /* Remember */
+
+    .login-options {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .login-options label {
+        color: #555;
+        font-size: 16px;
+    }
+
+    .login-options a {
+
+        color: #c70039;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .login-options a:hover {
+        text-decoration: underline;
+    }
+
+    /* Button */
+
+    .login-container button {
+
+        width: 100%;
+        padding: 16px;
+        border: none;
+        border-radius: 10px;
+        background: #d90429;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .login-container button:hover {
+        background: #b00020;
+    }
+
+    /* Register */
+
+    .register {
+
+        margin-top: 25px;
+        text-align: center;
+        color: #555;
+    }
+
+    .register a {
+
+        color: #c70039;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .register a:hover {
+        text-decoration: underline;
+    }
+
+    /* Mobile */
+
+    @media(max-width:768px) {
+
+        .login-container {
+
+            padding: 25px;
+        }
+
+        .login-container h1 {
+
+            font-size: 36px;
+        }
+
+        .login-container p {
+
+            font-size: 16px;
+        }
+
+        .login-options {
+
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+    }
+
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Header */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 8%;
+        background: #111;
+        color: rgb(241, 236, 236);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    header h1 {
+        font-size: 30px;
+        color: #ffcc00;
+    }
+
+    /* Navbar */
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        transition: .3s;
+        padding: 8px 15px;
+        border-radius: 5px;
+    }
+
+    nav a:hover {
+        background: #d90429;
+        color: #f3f1f1;
+    }
+
+    /* Responsive */
+    @media(max-width:768px) {
+
+        header {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        nav {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+    }
+
+    /* Offers Section */
+    .offers {
+        background: #000;
+        padding: 60px 8%;
+    }
+
+    .offers h2 {
+        text-align: center;
+        color: #ffd700;
+        font-size: 42px;
+        margin-bottom: 40px;
+    }
+
+    /* Offer Cards Container */
+    .offer-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    /* Offer Cards */
+    .offer-card {
+        width: 280px;
+        background: #1b1b1b;
+        color: #faf7f7;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .offer-card h3 {
+        color: #ff3b3b;
+        margin-bottom: 15px;
+    }
+
+    .offer-card p {
+        color: #f1ebeb;
+        line-height: 1.6;
+    }
+
+    .offer-card button {
+        margin-top: 20px;
+        padding: 12px 28px;
+        background: #e50914;
+        color: #fef7f7;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .offer-card button:hover {
+        background: #b20710;
+    }
+
+    body {
+        background-color: #ffffff;
+    }
 </style>
 
-<!-- Header -->
 <header>
-    <h1>🎬 Movie Ticket Booking</h1>
+    <h1>🎬 Book My Movie</h1>
 
     <nav>
         <a href="index.html">Home</a>
@@ -259,14 +287,13 @@ nav a:hover{
     </nav>
 </header>
 
-<!-- Login Modal -->
-<div id="loginModal" class="modal">
 
-    <div class="login-box">
+<section class="login-section">
 
-        <span class="close" onclick="closeLogin()">&times;</span>
+    <div class="login-container">
 
-        <h2>🔐 Login</h2>
+        <h1>🔐 Login</h1>
+        <p>Welcome back! Login to book your favorite movies.</p>
 
         <form>
 
@@ -274,13 +301,15 @@ nav a:hover{
 
             <input type="password" placeholder="Password" required>
 
-            <div class="remember">
+            <div class="login-options">
+
                 <label>
                     <input type="checkbox">
                     Remember Me
                 </label>
 
                 <a href="#">Forgot Password?</a>
+
             </div>
 
             <button type="submit">Login</button>
@@ -294,4 +323,4 @@ nav a:hover{
 
     </div>
 
-</div>
+</section>
