@@ -1,423 +1,848 @@
-<style>
-    /* ===== Movies Section ===== */
-    * {
-        background-color: #111;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .movies {
-        width: 90%;
-        margin: 60px auto;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Now Showing — Movie Ticket Booking</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    .section-title {
-        text-align: center;
-        font-size: 42px;
-        color: #ff0000;
-        margin-bottom: 40px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        animation: fadeDown 1s ease;
-    }
+        html,
+        body {
+            background-color: #111;
+        }
 
-    /* Grid */
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: #111;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
 
-    .movie-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 35px;
-    }
+        header h1 {
+            font-size: 30px;
+            color: #ffcc00;
+        }
 
-    /* Card */
+        /* Hidden checkbox that drives the mobile menu state (CSS-only, no JS) */
+        #menuCheck {
+            display: none;
+        }
 
-    .card {
-        background: #111;
-        border: 2px solid #222;
-        border-radius: 18px;
-        overflow: hidden;
-        transition: 0.4s ease;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
-        animation: fadeUp .8s ease;
-    }
+        /* Hamburger icon — hidden on desktop, shown on mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 22px;
+            cursor: pointer;
+            z-index: 1100;
+        }
 
-    .card:hover {
-        transform: translateY(-12px) scale(1.03);
-        border-color: #ff0000;
-        box-shadow: 0 0 30px rgba(255, 0, 0, .6);
-    }
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #ffcc00;
+            border-radius: 3px;
+            transition: .3s;
+        }
 
-    /* Movie Image */
+        /* Hamburger animates into an X when the checkbox is checked */
+        #menuCheck:checked~.menu-toggle span:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
 
-    .card img {
-        width: 100%;
-        height: 380px;
-        object-fit: cover;
-        transition: 0.5s;
-    }
-
-    .card:hover img {
-        transform: scale(1.08);
-    }
-
-    /* Movie Name */
-
-    .card h3 {
-        color: #fff;
-        text-align: center;
-        margin: 15px 0;
-        font-size: 25px;
-    }
-
-    /* Movie Details */
-
-    .card p {
-        color: #d0d0d0;
-        padding: 0 18px;
-        margin: 8px 0;
-        font-size: 15px;
-    }
-
-    /* Labels */
-
-    .card label {
-        display: block;
-        color: #ff4444;
-        margin: 15px 18px 6px;
-        font-weight: bold;
-    }
-
-    /* Input */
-
-    .card input,
-    .card select {
-        width: 88%;
-        margin: 0 18px;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        background: #222;
-        color: white;
-        font-size: 15px;
-        outline: none;
-        transition: .3s;
-    }
-
-    .card input:focus,
-    .card select:focus {
-        box-shadow: 0 0 10px red;
-    }
-
-    /* Button */
-
-    .card button {
-        width: 88%;
-        margin: 22px 18px;
-        padding: 13px;
-        border: none;
-        border-radius: 8px;
-        background: linear-gradient(45deg, #ff0000, #b30000);
-        color: white;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: .3s;
-    }
-
-    .card button:hover {
-        background: linear-gradient(45deg, #ffffff, #ff0000);
-        color: black;
-        transform: scale(1.05);
-        box-shadow: 0 0 20px red;
-    }
-
-    /* Animations */
-
-    @keyframes fadeUp {
-        from {
+        #menuCheck:checked~.menu-toggle span:nth-child(2) {
             opacity: 0;
-            transform: translateY(40px);
         }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes fadeDown {
-        from {
-            opacity: 0;
-            transform: translateY(-40px);
+        #menuCheck:checked~.menu-toggle span:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
         }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        /* Navbar */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
         }
-    }
 
-    /* Responsive */
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            transition: .3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
 
-    @media(max-width:768px) {
+        nav a:hover {
+            background: #d90429;
+            color: #fff;
+        }
+
+        /* ===== Movies Section ===== */
+        .movies {
+            width: 90%;
+            margin: 60px auto;
+        }
 
         .section-title {
-            font-size: 30px;
+            text-align: center;
+            font-size: 42px;
+            color: #ff0000;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeDown 1s ease;
         }
 
+        /* Grid */
         .movie-container {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
         }
 
+        /* Card */
+        .card {
+            background: #111;
+            border: 2px solid #222;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.4s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+            animation: fadeUp .8s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.03);
+            border-color: #ff0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, .6);
+        }
+
+        /* Movie Image */
         .card img {
-            height: 320px;
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: 0.5s;
+            display: block;
         }
 
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Movie Name */
         .card h3 {
+            color: #fff;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 25px;
+        }
+
+        /* Movie Details */
+        .card p {
+            color: #d0d0d0;
+            padding: 0 18px;
+            margin: 8px 0;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        /* Labels */
+        .card label {
+            display: block;
+            color: #ff4444;
+            margin: 15px 18px 6px;
+            font-weight: bold;
+        }
+
+        /* Input */
+        .card input,
+        .card select {
+            width: 88%;
+            margin: 0 18px;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: .3s;
+        }
+
+        .card input:focus,
+        .card select:focus {
+            box-shadow: 0 0 10px red;
+        }
+
+        /* Button */
+        .card button {
+            width: 88%;
+            margin: 22px 18px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #ff0000, #b30000);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .card button:hover {
+            background: linear-gradient(45deg, #ffffff, #ff0000);
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px red;
+        }
+
+        .card button:active {
+            transform: scale(0.97);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Success Popup Modal ===== */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(3px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+
+        .overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup {
+            background: #161616;
+            border: 2px solid #ff0000;
+            border-radius: 18px;
+            padding: 40px 35px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 0, 0, .5);
+            transform: scale(.8) translateY(20px);
+            transition: transform .3s ease;
+        }
+
+        .overlay.show .popup {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup .checkmark {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00c853, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 200, 83, .6);
+            animation: pop .4s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0);
+            }
+
+            70% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .popup h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .popup p.msg {
+            color: #bbb;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .popup .details {
+            background: #222;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin: 18px 0;
+            text-align: left;
+            font-size: 14px;
+            color: #eee;
+        }
+
+        .popup .details div {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        .popup .details span:first-child {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .popup button.close-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #ff0000, #b30000);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .popup button.close-btn:hover {
+            background: linear-gradient(45deg, #ffffff, #ff0000);
+            color: black;
+            box-shadow: 0 0 20px red;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background: linear-gradient(135deg, #0d0d0d, #1b1b1b);
+            color: #fff;
+            padding: 60px 8% 25px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-box h3 {
+            color: #ff3b3b;
+            margin-bottom: 18px;
             font-size: 22px;
         }
 
-    }
+        .footer-logo {
+            color: #ff3b3b;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
 
-    /* Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
+        .footer-box p {
+            color: #cfcfcf;
+            line-height: 1.8;
+            font-size: 15px;
+        }
 
-    /* Header */
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 18px 8%;
-        background: #111;
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
+        .footer-box ul {
+            list-style: none;
+        }
 
-    header h1 {
-        font-size: 30px;
-        color: #ffcc00;
-    }
+        .footer-box ul li {
+            margin: 12px 0;
+        }
 
-    /* Navbar */
-    nav {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-    }
+        .footer-box ul li a {
+            text-decoration: none;
+            color: #ddd;
+            transition: .3s;
+        }
 
-    nav a {
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: 500;
-        transition: .3s;
-        padding: 8px 15px;
-        border-radius: 5px;
-    }
+        .footer-box ul li a:hover {
+            color: #ff3b3b;
+            padding-left: 8px;
+        }
 
-    nav a:hover {
-        background: #d90429;
-        color: #fff;
-    }
-
-    /* Responsive */
-    @media(max-width:768px) {
-
-        header {
-            flex-direction: column;
+        .social-icons {
+            display: flex;
             gap: 15px;
+            margin: 20px 0;
         }
 
-        nav {
-            flex-wrap: wrap;
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: #262626;
+            border-radius: 50%;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 24px;
+            transition: .4s;
         }
 
-    }
-</style>
+        .social-icons a:hover {
+            background: #ff0000;
+            transform: translateY(-6px) scale(1.1);
+        }
 
-<header>
-    <h1>🎬 Movie Ticket Booking</h1>
+        .download {
+            color: #bbb;
+            margin-top: 10px;
+        }
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="movies.html">Movies</a>
-        <a href="offers.html">Offers</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html">Login</a>
-    </nav>
-</header>
+        .footer hr {
+            border: none;
+            height: 1px;
+            background: #444;
+            margin: 40px 0 20px;
+        }
 
-<section class="movies">
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    <h2 class="section-title">🎬 Now Showing</h2>
+        .footer-bottom p {
+            color: #bdbdbd;
+            font-size: 15px;
+        }
 
-    <div class="movie-container">
+        .footer-bottom span {
+            color: #ff3b3b;
+            font-weight: bold;
+        }
 
-        <!-- Movie 1 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=1" alt="Action Hero">
-            <h3>Action Hero</h3>
-            <p>⭐ 4.8 | Action | 2h 20m</p>
 
-            <label>Select Date</label>
-            <input type="date">
+        /* Responsive */
 
-            <label>Select Time</label>
-            <select>
-                <option>10:00 AM</option>
-                <option>1:00 PM</option>
-                <option>4:00 PM</option>
-                <option>7:00 PM</option>
-            </select>
+        @media(max-width:768px) {
 
-            <button>🎟 Book Ticket</button>
+            .footer {
+                text-align: center;
+            }
+
+            .footer-bottom {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .footer-logo {
+                font-size: 26px;
+            }
+
+        }
+
+        /* Responsive nav + layout */
+        @media(max-width:768px) {
+
+            header {
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #111;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 10px 0;
+                gap: 0;
+                border-top: 1px solid #222;
+            }
+
+            /* Reveal the nav when the hidden checkbox is checked */
+            #menuCheck:checked~nav {
+                display: flex;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 14px 15px;
+                border-radius: 0;
+                border-bottom: 1px solid #1c1c1c;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .movie-container {
+                grid-template-columns: 1fr;
+            }
+
+            .card img {
+                height: 320px;
+            }
+
+            .card h3 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎬 Movie Ticket Booking</h1>
+
+        <!-- Hidden checkbox drives the mobile menu open/close state, no JS needed -->
+        <input type="checkbox" id="menuCheck">
+
+        <label for="menuCheck" class="menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="offers.html">Offers</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <section class="movies">
+
+        <h2 class="section-title">🎬 Now Showing</h2>
+
+        <div class="movie-container" id="movieContainer">
+
+            <!-- Movie 1 -->
+            <div class="card" data-movie="Action Hero">
+                <img src="https://picsum.photos/300/400?random=1" alt="Action Hero">
+                <h3>Action Hero</h3>
+                <p>⭐ 4.8 | Action | 2h 20m</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>10:00 AM</option>
+                    <option>1:00 PM</option>
+                    <option>4:00 PM</option>
+                    <option>7:00 PM</option>
+                </select>
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 2 -->
+            <div class="card" data-movie="Comedy Night">
+                <img src="https://picsum.photos/300/400?random=2" alt="Comedy Night">
+                <h3>Comedy Night</h3>
+                <p>⭐ 4.6 | Comedy | 2h</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>11:00 AM</option>
+                    <option>2:00 PM</option>
+                    <option>5:00 PM</option>
+                    <option>8:00 PM</option>
+                </select>
+
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 3 -->
+            <div class="card" data-movie="Romantic Love">
+                <img src="https://picsum.photos/300/400?random=3" alt="Romantic Love">
+                <h3>Romantic Love</h3>
+                <p>⭐ 4.7 | Romance | 2h 10m</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>9:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>3:00 PM</option>
+                    <option>6:00 PM</option>
+                </select>
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 4 -->
+            <div class="card" data-movie="Horror House">
+                <img src="https://picsum.photos/300/400?random=4" alt="Horror House">
+                <h3>Horror House</h3>
+                <p>⭐ 4.5 | Horror | 2h</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>10:30 AM</option>
+                    <option>1:30 PM</option>
+                    <option>4:30 PM</option>
+                    <option>7:30 PM</option>
+                </select>
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 5 -->
+            <div class="card" data-movie="Sci-Fi World">
+                <img src="https://picsum.photos/300/400?random=5" alt="Sci-Fi World">
+                <h3>Sci-Fi World</h3>
+                <p>⭐ 4.9 | Sci-Fi | 2h 30m</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>11:30 AM</option>
+                    <option>2:30 PM</option>
+                    <option>5:30 PM</option>
+                    <option>8:30 PM</option>
+                </select>
+
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 6 -->
+            <div class="card" data-movie="Mystery Case">
+                <img src="https://picsum.photos/300/400?random=6" alt="Mystery Case">
+                <h3>Mystery Case</h3>
+                <p>⭐ 4.4 | Thriller | 2h 15m</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>9:30 AM</option>
+                    <option>12:30 PM</option>
+                    <option>3:30 PM</option>
+                    <option>6:30 PM</option>
+                </select>
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 7 -->
+            <div class="card" data-movie="The Last Warrior">
+                <img src="https://picsum.photos/300/400?random=7" alt="The Last Warrior">
+                <h3>The Last Warrior</h3>
+                <p>⭐ 4.8 | Adventure | 2h 25m</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>10:00 AM</option>
+                    <option>1:00 PM</option>
+                    <option>4:00 PM</option>
+                    <option>7:00 PM</option>
+                </select>
+
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Movie 8 -->
+            <div class="card" data-movie="Galaxy Mission">
+                <img src="https://picsum.photos/300/400?random=8" alt="Galaxy Mission">
+                <h3>Galaxy Mission</h3>
+                <p>⭐ 4.9 | Sci-Fi | 2h 40m</p>
+
+                <label>Select Date</label>
+                <input type="date" class="date-input">
+
+                <label>Select Time</label>
+                <select class="time-select">
+                    <option>11:00 AM</option>
+                    <option>2:00 PM</option>
+                    <option>5:00 PM</option>
+                    <option>8:00 PM</option>
+                </select>
+
+                <form action="success.html">
+                    <button type="submit" class="book-btn">
+                        🎟 Book Ticket
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <!-- Logo -->
+            <div class="footer-box">
+                <h2 class="footer-logo">🎬 Book My Movie</h2>
+                <p>
+                    Book your favorite movies anytime, anywhere with a fast,
+                    secure and hassle-free ticket booking experience.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-box">
+                <h3>Quick Links</h3>
+
+                <ul>
+                    <li><a href="index.html">🏠 Home</a></li>
+                    <li><a href="movies.html">🎥 Movies</a></li>
+                    <li><a href="offers.html">🔥 Offers</a></li>
+                    <li><a href="contact.html">📞 Contact</a></li>
+                    <li><a href="login.html">👤 Login</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-box">
+                <h3>Contact Us</h3>
+
+                <p>📧 bookmymovie@gmail.com</p>
+                <p>📱 +91 7387129855</p>
+                <p>📍 Nashik, Maharashtra, India</p>
+                <p>🕒 Support: 9:00 AM - 10:00 PM</p>
+            </div>
+
+            <!-- Social -->
+            <div class="footer-box">
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">🐦</a>
+                    <a href="#">▶️</a>
+                </div>
+
+                <p class="download">
+                    Download our app for faster booking.
+                </p>
+            </div>
+
         </div>
 
-        <!-- Movie 2 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=2" alt="Comedy Night">
-            <h3>Comedy Night</h3>
-            <p>⭐ 4.6 | Comedy | 2h</p>
+        <hr>
 
-            <label>Select Date</label>
-            <input type="date">
+        <div class="footer-bottom">
+            <p>
+                © 2026 <span>Book My Movie</span> | All Rights Reserved.
+            </p>
 
-            <label>Select Time</label>
-            <select>
-                <option>11:00 AM</option>
-                <option>2:00 PM</option>
-                <option>5:00 PM</option>
-                <option>8:00 PM</option>
-            </select>
-
-            <button>🎟 Book Ticket</button>
+            <p>
+                Made with ❤️ for Movie Lovers
+            </p>
         </div>
 
-        <!-- Movie 3 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=3" alt="Romantic Love">
-            <h3>Romantic Love</h3>
-            <p>⭐ 4.7 | Romance | 2h 10m</p>
+    </footer>
 
-            <label>Select Date</label>
-            <input type="date">
 
-            <label>Select Time</label>
-            <select>
-                <option>9:00 AM</option>
-                <option>12:00 PM</option>
-                <option>3:00 PM</option>
-                <option>6:00 PM</option>
-            </select>
+</body>
 
-            <button>🎟 Book Ticket</button>
-        </div>
-
-        <!-- Movie 4 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=4" alt="Horror House">
-            <h3>Horror House</h3>
-            <p>⭐ 4.5 | Horror | 2h</p>
-
-            <label>Select Date</label>
-            <input type="date">
-
-            <label>Select Time</label>
-            <select>
-                <option>10:30 AM</option>
-                <option>1:30 PM</option>
-                <option>4:30 PM</option>
-                <option>7:30 PM</option>
-            </select>
-
-            <button>🎟 Book Ticket</button>
-        </div>
-
-        <!-- Movie 5 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=5" alt="Sci-Fi World">
-            <h3>Sci-Fi World</h3>
-            <p>⭐ 4.9 | Sci-Fi | 2h 30m</p>
-
-            <label>Select Date</label>
-            <input type="date">
-
-            <label>Select Time</label>
-            <select>
-                <option>11:30 AM</option>
-                <option>2:30 PM</option>
-                <option>5:30 PM</option>
-                <option>8:30 PM</option>
-            </select>
-
-            <button>🎟 Book Ticket</button>
-        </div>
-
-        <!-- Movie 6 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=6" alt="Mystery Case">
-            <h3>Mystery Case</h3>
-            <p>⭐ 4.4 | Thriller | 2h 15m</p>
-
-            <label>Select Date</label>
-            <input type="date">
-
-            <label>Select Time</label>
-            <select>
-                <option>9:30 AM</option>
-                <option>12:30 PM</option>
-                <option>3:30 PM</option>
-                <option>6:30 PM</option>
-            </select>
-
-            <button>🎟 Book Ticket</button>
-        </div>
-
-        <!-- Movie 7 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=7" alt="The Last Warrior">
-            <h3>The Last Warrior</h3>
-            <p>⭐ 4.8 | Adventure | 2h 25m</p>
-
-            <label>Select Date</label>
-            <input type="date">
-
-            <label>Select Time</label>
-            <select>
-                <option>10:00 AM</option>
-                <option>1:00 PM</option>
-                <option>4:00 PM</option>
-                <option>7:00 PM</option>
-            </select>
-
-            <button>🎟 Book Ticket</button>
-        </div>
-
-        <!-- Movie 8 -->
-        <div class="card">
-            <img src="https://picsum.photos/300/400?random=8" alt="Galaxy Mission">
-            <h3>Galaxy Mission</h3>
-            <p>⭐ 4.9 | Sci-Fi | 2h 40m</p>
-
-            <label>Select Date</label>
-            <input type="date">
-
-            <label>Select Time</label>
-            <select>
-                <option>11:00 AM</option>
-                <option>2:00 PM</option>
-                <option>5:00 PM</option>
-                <option>8:00 PM</option>
-            </select>
-
-            <button>🎟 Book Ticket</button>
-        </div>
-
-    </div>
-</section>
+</html>

@@ -1,190 +1,542 @@
-<style>
-    /* Contact Section */
-    .contact {
-        padding: 60px 8%;
-        background: #f8f8f8;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .contact h2 {
-        text-align: center;
-        font-size: 36px;
-        color: #d90429;
-        margin-bottom: 10px;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book My Movie - Contact</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    .contact p {
-        text-align: center;
-        color: #555;
-        margin-bottom: 30px;
-    }
+        body {
+            background: #000;
+        }
 
-    .contact-container {
-        display: flex;
-        justify-content: space-between;
-        gap: 40px;
-        flex-wrap: wrap;
-    }
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: #111;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    .contact-info,
-    .contact-form {
-        flex: 1;
-        min-width: 300px;
-    }
+        header h1 {
+            font-size: 30px;
+            color: #ffcc00;
+        }
 
-    .contact-info h3 {
-        color: #111;
-        margin-bottom: 15px;
-    }
+        /* Hidden checkbox that drives the mobile menu state (CSS-only, no JS) */
+        #menuCheck {
+            display: none;
+        }
 
-    .contact-info p {
-        text-align: left;
-        margin: 12px 0;
-        font-size: 17px;
-    }
+        /* Hamburger icon — hidden on desktop, shown on mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 22px;
+            cursor: pointer;
+            z-index: 1100;
+        }
 
-    .contact-form form {
-        display: flex;
-        flex-direction: column;
-    }
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #ffcc00;
+            border-radius: 3px;
+            transition: .3s;
+        }
 
-    .contact-form input,
-    .contact-form textarea {
-        padding: 12px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 16px;
-    }
+        /* Hamburger animates into an X when the checkbox is checked */
+        #menuCheck:checked~.menu-toggle span:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
 
-    .contact-form button {
-        padding: 12px;
-        background: #d90429;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 18px;
-        transition: .3s;
-    }
+        #menuCheck:checked~.menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
 
-    .contact-form button:hover {
-        background: #111;
-    }
+        #menuCheck:checked~.menu-toggle span:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
+        }
 
-    /* Responsive */
-    @media(max-width:768px) {
+        /* Navbar */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            transition: .3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: #d90429;
+            color: #fff;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 60px 8%;
+            background: #000;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .contact p {
+            text-align: center;
+            color: #bbb;
+            margin-bottom: 30px;
+        }
+
         .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info,
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: #1b1b1b;
+            border: 1px solid #333;
+            border-radius: 14px;
+            padding: 30px;
+        }
+
+        .contact-info h3 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            text-align: left;
+            margin: 12px 0;
+            font-size: 17px;
+            color: #ddd;
+        }
+
+        .contact-form form {
+            display: flex;
             flex-direction: column;
         }
-    }
 
-    /* Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #111;
+            color: #fff;
+        }
 
-    /* Header */
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 18px 8%;
-        background: #111;
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #888;
+        }
 
-    header h1 {
-        font-size: 30px;
-        color: #ffcc00;
-    }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #d90429;
+        }
 
-    /* Navbar */
-    nav {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-    }
+        .contact-form button {
+            padding: 12px;
+            background: #d90429;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: .3s;
+        }
 
-    nav a {
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: 500;
-        transition: .3s;
-        padding: 8px 15px;
-        border-radius: 5px;
-    }
+        .contact-form button:hover {
+            background: #ffcc00;
+            color: #111;
+        }
 
-    nav a:hover {
-        background: #d90429;
-        color: #fff;
-    }
+        /* ==========================
+       FOOTER
+    ========================== */
 
-    /* Responsive */
-    @media(max-width:768px) {
+        .footer {
+            background: #111;
+            padding: 60px 8% 25px;
+            color: #fff;
+        }
 
-        header {
-            flex-direction: column;
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            color: #ffcc00;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .footer-box h3 {
+            color: #d90429;
+            margin-bottom: 18px;
+        }
+
+        .footer-box p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .footer-box ul {
+            list-style: none;
+        }
+
+        .footer-box ul li {
+            margin: 12px 0;
+        }
+
+        .footer-box ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .footer-box ul li a:hover {
+            color: #d90429;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #222;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 22px;
+            transition: .3s;
+        }
+
+        .social-icons a:hover {
+            background: #d90429;
+        }
+
+        .footer hr {
+            margin: 35px 0;
+            border: none;
+            height: 1px;
+            background: #333;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 15px;
         }
 
-        nav {
-            flex-wrap: wrap;
-            justify-content: center;
+        .footer-bottom span {
+            color: #d90429;
         }
 
-    }
-</style>
+        /* ==========================
+       TABLET
+    ========================== */
 
-<header>
-    <h1>🎬 Movie Ticket Booking</h1>
+        @media(max-width:1024px) {
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="movies.html">Movies</a>
-        <a href="offers.html">Offers</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html">Login</a>
-    </nav>
-</header>
+            .contact {
+                padding: 50px 5%;
+            }
+
+            .footer {
+                padding: 50px 5%;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ==========================
+       MOBILE
+    ========================== */
+
+        @media(max-width:768px) {
+
+            header {
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #111;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 10px 0;
+                gap: 0;
+                border-top: 1px solid #262626;
+            }
+
+            /* Reveal the nav when the hidden checkbox is checked */
+            #menuCheck:checked~nav {
+                display: flex;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 14px 15px;
+                border-radius: 0;
+                border-bottom: 1px solid #1c1c1c;
+            }
+
+            .contact {
+                padding: 40px 15px;
+            }
+
+            .contact h2 {
+                font-size: 28px;
+            }
+
+            .contact p {
+                font-size: 15px;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .contact-info,
+            .contact-form {
+                min-width: 100%;
+                padding: 22px 18px;
+            }
+
+            .contact-info p {
+                text-align: center;
+                font-size: 15px;
+            }
+
+            .contact-info h3 {
+                text-align: center;
+            }
+
+            .contact-form button {
+                width: 100%;
+            }
+
+            .footer {
+                padding: 40px 15px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ==========================
+       SMALL MOBILE
+    ========================== */
+
+        @media(max-width:480px) {
+
+            header {
+                padding: 14px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .contact h2 {
+                font-size: 24px;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                font-size: 15px;
+            }
+
+            .footer-logo {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎬 Movie Ticket Booking</h1>
+
+        <!-- Hidden checkbox drives the mobile menu open/close state, no JS needed -->
+        <input type="checkbox" id="menuCheck">
+
+        <label for="menuCheck" class="menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="offers.html">Offers</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
 
 
-<!-- Contact Section -->
-<section class="contact">
+    <!-- Contact Section -->
+    <section class="contact">
 
-    <h2>📞 Contact Us</h2>
-    <p>Have questions? We'd love to hear from you.</p>
+        <h2>📞 Contact Us</h2>
+        <p>Have questions? We'd love to hear from you.</p>
 
-    <div class="contact-container">
+        <div class="contact-container">
 
-        <div class="contact-info">
-            <h3>Get in Touch</h3>
-            <p>📍 Address: Shirpur, Maharashtra, India</p>
-            <p>📞 Phone: +91 7387129855</p>
-            <p>📧 Email: support@moviebooking.com</p>
-            <p>🕒 Working Hours: 10:00 AM - 10:00 PM</p>
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>📍 Address: Shirpur, Maharashtra, India</p>
+                <p>📞 Phone: +91 7387129855</p>
+                <p>📧 Email: support@moviebooking.com</p>
+                <p>🕒 Working Hours: 10:00 AM - 10:00 PM</p>
+            </div>
+
+            <div class="contact-form">
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+
+                    <input type="email" placeholder="Your Email" required>
+
+                    <input type="tel" placeholder="Mobile Number" required>
+
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
         </div>
 
-        <div class="contact-form">
-            <form>
-                <input type="text" placeholder="Your Name" required>
+    </section>
 
-                <input type="email" placeholder="Your Email" required>
 
-                <input type="tel" placeholder="Mobile Number" required>
+    <!-- Footer -->
+    <footer class="footer">
 
-                <textarea rows="5" placeholder="Your Message" required></textarea>
+        <div class="footer-container">
 
-                <button type="submit">Send Message</button>
-            </form>
+            <div class="footer-box">
+                <h2 class="footer-logo">🎬 Book My Movie</h2>
+                <p>
+                    Book your favorite movies anytime, anywhere with a fast,
+                    secure and hassle-free ticket booking experience.
+                </p>
+            </div>
+
+            <div class="footer-box">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">🏠 Home</a></li>
+                    <li><a href="movies.html">🎥 Movies</a></li>
+                    <li><a href="offers.html">🔥 Offers</a></li>
+                    <li><a href="contact.html">📞 Contact</a></li>
+                    <li><a href="login.html">👤 Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-box">
+                <h3>Contact Us</h3>
+                <p>📧 support@moviebooking.com</p>
+                <p>📱 +91 7387129855</p>
+                <p>📍 Shirpur, Maharashtra, India</p>
+                <p>🕒 Support: 10:00 AM - 10:00 PM</p>
+            </div>
+
+            <div class="footer-box">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">🐦</a>
+                    <a href="#">▶️</a>
+                </div>
+                <p class="download">Download our app for faster booking.</p>
+            </div>
+
         </div>
 
-    </div>
+        <hr>
 
-</section>
+        <div class="footer-bottom">
+            <p>© 2026 <span>Book My Movie</span> | All Rights Reserved.</p>
+            <p>Made with ❤️ for Movie Lovers</p>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
