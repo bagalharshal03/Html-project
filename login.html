@@ -222,6 +222,88 @@
         }
 
         /* ==========================
+       SUCCESS POPUP MODAL (pure CSS, driven by :target)
+    ========================== */
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(3px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* When the URL hash matches this popup's id, show it — no JS needed */
+        .overlay:target {
+            display: flex;
+        }
+
+        .popup {
+            background: #161616;
+            border: 2px solid #d90429;
+            border-radius: 18px;
+            padding: 40px 35px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(217, 4, 41, .5);
+            position: relative;
+        }
+
+        .popup .checkmark {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00c853, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 200, 83, .6);
+        }
+
+        .popup h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .popup p.msg {
+            color: #bbb;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .popup .close-btn {
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #d90429, #8f0018);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+        }
+
+        .popup .close-btn:hover {
+            background: linear-gradient(45deg, #ffffff, #d90429);
+            color: black;
+            box-shadow: 0 0 20px #d90429;
+        }
+
+        /* ==========================
        FOOTER
     ========================== */
 
@@ -474,11 +556,13 @@
             <h1>🔐 Login</h1>
             <p>Welcome back! Login to book your favorite movies.</p>
 
-            <form>
+            <!-- No JavaScript: submitting jumps the page to #loginSuccess, and the
+                 .overlay:target CSS rule below reveals the popup -->
+            <form action="#loginSuccess" method="get">
 
-                <input type="email" placeholder="Email Address" required>
+                <input type="email" name="email" placeholder="Email Address" required>
 
-                <input type="password" placeholder="Password" required>
+                <input type="password" name="password" placeholder="Password" required>
 
                 <div class="login-options">
 
@@ -503,6 +587,16 @@
         </div>
 
     </section>
+
+    <!-- Success Popup — shown purely via CSS :target, no JavaScript -->
+    <div class="overlay" id="loginSuccess">
+        <div class="popup">
+            <div class="checkmark">✓</div>
+            <h2>Login Successful!</h2>
+            <p class="msg"></p>
+            <a href="index.html" class="close-btn">Continue</a>
+        </div>
+    </div>
 
 
     <!-- Footer -->

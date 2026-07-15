@@ -36,12 +36,10 @@
             color: #ffcc00;
         }
 
-        /* Hidden checkbox that drives the mobile menu state (CSS-only, no JS) */
         #menuCheck {
             display: none;
         }
 
-        /* Hamburger icon — hidden on desktop, shown on mobile */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -61,7 +59,6 @@
             transition: .3s;
         }
 
-        /* Hamburger animates into an X when the checkbox is checked */
         #menuCheck:checked~.menu-toggle span:nth-child(1) {
             transform: translateY(9.5px) rotate(45deg);
         }
@@ -74,7 +71,6 @@
             transform: translateY(-9.5px) rotate(-45deg);
         }
 
-        /* Navbar */
         nav {
             display: flex;
             align-items: center;
@@ -96,7 +92,6 @@
             color: #fff;
         }
 
-        /* Contact Section */
         .contact {
             padding: 60px 8%;
             background: #000;
@@ -185,6 +180,88 @@
         .contact-form button:hover {
             background: #ffcc00;
             color: #111;
+        }
+
+        /* ==========================
+       SUCCESS POPUP MODAL (pure CSS, driven by :target)
+    ========================== */
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(3px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* When the URL hash matches this popup's id, show it — no JS needed */
+        .overlay:target {
+            display: flex;
+        }
+
+        .popup {
+            background: #161616;
+            border: 2px solid #d90429;
+            border-radius: 18px;
+            padding: 40px 35px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(217, 4, 41, .5);
+            position: relative;
+        }
+
+        .popup .checkmark {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00c853, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 200, 83, .6);
+        }
+
+        .popup h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .popup p.msg {
+            color: #bbb;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .popup .close-btn {
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #d90429, #8f0018);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+        }
+
+        .popup .close-btn:hover {
+            background: linear-gradient(45deg, #ffffff, #d90429);
+            color: black;
+            box-shadow: 0 0 20px #d90429;
         }
 
         /* ==========================
@@ -280,10 +357,6 @@
             color: #d90429;
         }
 
-        /* ==========================
-       TABLET
-    ========================== */
-
         @media(max-width:1024px) {
 
             .contact {
@@ -298,10 +371,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
-        /* ==========================
-       MOBILE
-    ========================== */
 
         @media(max-width:768px) {
 
@@ -326,7 +395,6 @@
                 border-top: 1px solid #262626;
             }
 
-            /* Reveal the nav when the hidden checkbox is checked */
             #menuCheck:checked~nav {
                 display: flex;
             }
@@ -394,10 +462,6 @@
             }
         }
 
-        /* ==========================
-       SMALL MOBILE
-    ========================== */
-
         @media(max-width:480px) {
 
             header {
@@ -429,7 +493,6 @@
     <header>
         <h1>🎬 Movie Ticket Booking</h1>
 
-        <!-- Hidden checkbox drives the mobile menu open/close state, no JS needed -->
         <input type="checkbox" id="menuCheck">
 
         <label for="menuCheck" class="menu-toggle" aria-label="Toggle navigation">
@@ -465,14 +528,16 @@
             </div>
 
             <div class="contact-form">
-                <form>
-                    <input type="text" placeholder="Your Name" required>
+                <!-- No JavaScript: submitting jumps the page to #successPopup, and the
+                     .overlay:target CSS rule below reveals the popup -->
+                <form action="#successPopup" method="get">
+                    <input type="text" name="name" placeholder="Your Name" required>
 
-                    <input type="email" placeholder="Your Email" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
 
-                    <input type="tel" placeholder="Mobile Number" required>
+                    <input type="tel" name="mobile" placeholder="Mobile Number" required>
 
-                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                    <textarea rows="5" name="message" placeholder="Your Message" required></textarea>
 
                     <button type="submit">Send Message</button>
                 </form>
@@ -481,6 +546,16 @@
         </div>
 
     </section>
+
+    <!-- Success Popup — shown purely via CSS :target, no JavaScript -->
+    <div class="overlay" id="successPopup">
+        <div class="popup">
+            <div class="checkmark">✓</div>
+            <h2>Message Sent!</h2>
+            <p class="msg"></p>
+            <a href="#" class="close-btn">Close</a>
+        </div>
+    </div>
 
 
     <!-- Footer -->
