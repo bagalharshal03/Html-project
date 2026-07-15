@@ -43,12 +43,10 @@
             font-size: 30px;
         }
 
-        /* Hidden checkbox that drives the mobile menu state (CSS-only, no JS) */
         #menuCheck {
             display: none;
         }
 
-        /* Hamburger icon — hidden on desktop, shown on mobile */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -68,7 +66,6 @@
             transition: .3s;
         }
 
-        /* Hamburger animates into an X when the checkbox is checked */
         #menuCheck:checked~.menu-toggle span:nth-child(1) {
             transform: translateY(9.5px) rotate(45deg);
         }
@@ -169,7 +166,8 @@
             color: #ffd700;
         }
 
-        .offer-card button {
+        .offer-card .claim-btn {
+            display: inline-block;
             margin-top: 20px;
             padding: 12px 30px;
             border: none;
@@ -181,8 +179,100 @@
             transition: .3s;
         }
 
-        .offer-card button:hover {
+        .offer-card .claim-btn:hover {
             background: #b20710;
+        }
+
+        /* ==========================
+   CSS-ONLY POPUP (one per offer)
+========================== */
+
+        /* the state-holding checkbox is never visible itself */
+        .claim-check {
+            display: none;
+        }
+
+        /* full-screen dim backdrop, hidden until its checkbox is checked */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: #1b1b1b;
+            border: 1px solid #2ecc71;
+            border-radius: 18px;
+            padding: 40px 30px;
+            max-width: 340px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(46, 204, 113, .4);
+        }
+
+        .modal-box .tick {
+            font-size: 46px;
+            margin-bottom: 12px;
+        }
+
+        .modal-box h3 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .modal-box p {
+            color: #ddd;
+            margin-bottom: 6px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .modal-coupon {
+            display: inline-block;
+            margin: 10px 0 22px;
+            padding: 8px 18px;
+            border: 1px dashed #ffd700;
+            border-radius: 8px;
+            color: #ffd700;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .modal-close {
+            display: inline-block;
+            padding: 10px 28px;
+            border-radius: 30px;
+            background: #2ecc71;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .modal-close:hover {
+            background: #27ae60;
+        }
+
+        /* each checkbox reveals ONLY its own matching overlay by id */
+        #claim1:checked~#modal1,
+        #claim2:checked~#modal2,
+        #claim3:checked~#modal3,
+        #claim4:checked~#modal4,
+        #claim5:checked~#modal5,
+        #claim6:checked~#modal6,
+        #claim7:checked~#modal7,
+        #claim8:checked~#modal8,
+        #claim9:checked~#modal9,
+        #claim10:checked~#modal10,
+        #claim11:checked~#modal11,
+        #claim12:checked~#modal12 {
+            display: flex;
         }
 
         /* ==========================
@@ -362,7 +452,6 @@
                 border-top: 1px solid #262626;
             }
 
-            /* Reveal the nav when the hidden checkbox is checked */
             #menuCheck:checked~nav {
                 display: flex;
             }
@@ -407,7 +496,7 @@
                 font-size: 14px;
             }
 
-            .offer-card button {
+            .offer-card .claim-btn {
                 width: 100%;
                 padding: 12px;
                 font-size: 15px;
@@ -468,7 +557,7 @@
                 font-size: 18px;
             }
 
-            .offer-card button {
+            .offer-card .claim-btn {
                 width: 100%;
             }
 
@@ -485,7 +574,6 @@
     <header>
         <h1>🎬 Movie Ticket Booking</h1>
 
-        <!-- Hidden checkbox drives the mobile menu open/close state, no JS needed -->
         <input type="checkbox" id="menuCheck">
 
         <label for="menuCheck" class="menu-toggle" aria-label="Toggle navigation">
@@ -516,100 +604,220 @@
 
         <div class="offers-container">
 
+            <input type="checkbox" id="claim1" class="claim-check">
             <div class="offer-card">
                 <span class="badge">HOT</span>
                 <h3>🎉 First Booking</h3>
                 <p>Get <strong>20% OFF</strong> on your first booking.</p>
                 <p><b>Coupon:</b> FIRST20</p>
-                <button>Claim Now</button>
+                <label for="claim1" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal1">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>First Booking discount has been applied.</p>
+                    <span class="modal-coupon">FIRST20</span><br>
+                    <label for="claim1" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim2" class="claim-check">
             <div class="offer-card">
                 <span class="badge">FREE</span>
                 <h3>🍿 Popcorn Combo</h3>
                 <p>Buy 2 Tickets & Get <strong>Free Popcorn</strong>.</p>
                 <p><b>Coupon:</b> POPFREE</p>
-                <button>Claim Now</button>
+                <label for="claim2" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal2">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>Free popcorn has been added to your next order.</p>
+                    <span class="modal-coupon">POPFREE</span><br>
+                    <label for="claim2" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim3" class="claim-check">
             <div class="offer-card">
                 <span class="badge">₹100</span>
                 <h3>💳 UPI Cashback</h3>
                 <p>Pay with UPI & Get <strong>₹100 Cashback</strong>.</p>
                 <p><b>Coupon:</b> UPI100</p>
-                <button>Claim Now</button>
+                <label for="claim3" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal3">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>₹100 cashback will reflect on UPI payment.</p>
+                    <span class="modal-coupon">UPI100</span><br>
+                    <label for="claim3" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim4" class="claim-check">
             <div class="offer-card">
                 <span class="badge">15%</span>
                 <h3>🎬 Weekend Special</h3>
                 <p>Enjoy <strong>15% OFF</strong> every weekend.</p>
                 <p><b>Coupon:</b> WEEKEND15</p>
-                <button>Claim Now</button>
+                <label for="claim4" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal4">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>15% weekend discount is now active.</p>
+                    <span class="modal-coupon">WEEKEND15</span><br>
+                    <label for="claim4" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim5" class="claim-check">
             <div class="offer-card">
                 <span class="badge">25%</span>
                 <h3>👨‍👩‍👧 Family Pack</h3>
                 <p>Book 4 Tickets & Save <strong>25%</strong>.</p>
                 <p><b>Coupon:</b> FAMILY25</p>
-                <button>Claim Now</button>
+                <label for="claim5" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal5">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>Family pack discount applied to 4 tickets.</p>
+                    <span class="modal-coupon">FAMILY25</span><br>
+                    <label for="claim5" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim6" class="claim-check">
             <div class="offer-card">
                 <span class="badge">30%</span>
                 <h3>🎓 Student Offer</h3>
                 <p>Students get <strong>30% OFF</strong>.</p>
                 <p><b>Coupon:</b> STUDENT30</p>
-                <button>Claim Now</button>
+                <label for="claim6" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal6">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>Student discount of 30% has been applied.</p>
+                    <span class="modal-coupon">STUDENT30</span><br>
+                    <label for="claim6" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim7" class="claim-check">
             <div class="offer-card">
                 <span class="badge">LOVE</span>
                 <h3>❤️ Couple Offer</h3>
                 <p>Free Cold Drink with Couple Tickets.</p>
                 <p><b>Coupon:</b> LOVE2</p>
-                <button>Claim Now</button>
+                <label for="claim7" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal7">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>Free cold drinks added to your couple booking.</p>
+                    <span class="modal-coupon">LOVE2</span><br>
+                    <label for="claim7" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim8" class="claim-check">
             <div class="offer-card">
                 <span class="badge">50%</span>
                 <h3>🎂 Birthday Offer</h3>
                 <p>Get <strong>50% OFF</strong> on your Birthday.</p>
                 <p><b>Coupon:</b> BDAY50</p>
-                <button>Claim Now</button>
+                <label for="claim8" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal8">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>Happy Birthday! 50% off has been applied.</p>
+                    <span class="modal-coupon">BDAY50</span><br>
+                    <label for="claim8" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim9" class="claim-check">
             <div class="offer-card">
                 <span class="badge">35%</span>
                 <h3>🌙 Midnight Show</h3>
                 <p>Late Night Shows at <strong>35% OFF</strong>.</p>
                 <p><b>Coupon:</b> NIGHT35</p>
-                <button>Claim Now</button>
+                <label for="claim9" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal9">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>Midnight show discount is now active.</p>
+                    <span class="modal-coupon">NIGHT35</span><br>
+                    <label for="claim9" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim10" class="claim-check">
             <div class="offer-card">
                 <span class="badge">VIP</span>
                 <h3>💎 VIP Member</h3>
                 <p>Members get <strong>40% OFF</strong>.</p>
                 <p><b>Coupon:</b> VIP40</p>
-                <button>Claim Now</button>
+                <label for="claim10" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal10">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>VIP membership discount has been applied.</p>
+                    <span class="modal-coupon">VIP40</span><br>
+                    <label for="claim10" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim11" class="claim-check">
             <div class="offer-card">
                 <span class="badge">₹200</span>
                 <h3>🏦 Card Offer</h3>
                 <p>Use Credit Card & Get <strong>₹200 OFF</strong>.</p>
                 <p><b>Coupon:</b> CARD200</p>
-                <button>Claim Now</button>
+                <label for="claim11" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal11">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>₹200 credit card discount has been applied.</p>
+                    <span class="modal-coupon">CARD200</span><br>
+                    <label for="claim11" class="modal-close">Close</label>
+                </div>
             </div>
 
+            <input type="checkbox" id="claim12" class="claim-check">
             <div class="offer-card">
                 <span class="badge">🎁</span>
                 <h3>Lucky Draw</h3>
                 <p>Win Free Movie Tickets Every Week.</p>
                 <p><b>Coupon:</b> LUCKYWIN</p>
-                <button>Claim Now</button>
+                <label for="claim12" class="claim-btn">Claim Now</label>
+            </div>
+            <div class="modal-overlay" id="modal12">
+                <div class="modal-box">
+                    <div class="tick">✅</div>
+                    <h3>Offer Claimed Successfully!</h3>
+                    <p>You've been entered into this week's lucky draw.</p>
+                    <span class="modal-coupon">LUCKYWIN</span><br>
+                    <label for="claim12" class="modal-close">Close</label>
+                </div>
             </div>
 
         </div>
@@ -621,7 +829,6 @@
 
         <div class="footer-container">
 
-            <!-- Logo -->
             <div class="footer-box">
                 <h2 class="footer-logo">🎬 Book My Movie</h2>
                 <p>
@@ -630,7 +837,6 @@
                 </p>
             </div>
 
-            <!-- Quick Links -->
             <div class="footer-box">
                 <h3>Quick Links</h3>
 
@@ -643,7 +849,6 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
             <div class="footer-box">
                 <h3>Contact Us</h3>
 
@@ -653,7 +858,6 @@
                 <p>🕒 Support: 9:00 AM - 10:00 PM</p>
             </div>
 
-            <!-- Social -->
             <div class="footer-box">
                 <h3>Follow Us</h3>
 
